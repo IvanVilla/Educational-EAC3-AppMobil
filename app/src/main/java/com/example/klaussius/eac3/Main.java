@@ -21,9 +21,9 @@ import zergFakeData.CreateProfile;
 
 public class Main extends AppCompatActivity {
 
-    TextView tvMain;
-    Button btProfile;
-    Button btOfferMap;
+    private TextView tvMain;
+    private Button btProfile;
+    private Button btOfferMap;
 
     /**
      * OnCreate Main Activity

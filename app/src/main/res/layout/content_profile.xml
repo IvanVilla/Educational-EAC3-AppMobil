@@ -35,5 +35,89 @@
             android:layout_height="wrap_content"
             android:id="@+id/tvContent"
             android:layout_marginTop="15dp" />
+
+        <TextView
+            android:text="@string/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvName" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/etName" />
+
+        <TextView
+            android:text="@string/surname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvSurname" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/etSurname" />
+
+        <TextView
+            android:text="@string/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDescription" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/etDescription" />
+
+        <TextView
+            android:text="@string/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvImage" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/etImage" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:text="@string/guardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btSaveProfile"
+                android:backgroundTint="@android:color/holo_green_light"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="@string/clear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btClearProfile"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_orange_light" />
+
+            <Button
+                android:text="@string/takeBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btTakeBack"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_red_light" />
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>

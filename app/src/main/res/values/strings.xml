@@ -5,4 +5,11 @@
     <string name="title_activity_profile">Profile</string>
     <string name="profile">Perfil</string>
     <string name="offerMap">Mapa de Ofertas</string>
+    <string name="guardar">Guardar</string>
+    <string name="clear">Limpiar</string>
+    <string name="takeBack">Volver</string>
+    <string name="name">Nombre</string>
+    <string name="surname">Apellidos</string>
+    <string name="etDescription">Descripción</string>
+    <string name="image">Imagen</string>
 </resources>
