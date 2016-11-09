@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,7 +23,8 @@ import zergFakeData.CreateProfile;
 
 public class Main extends AppCompatActivity {
 
-    private TextView tvMain;
+    private TextView tvOffersNumber;
+    private ListView lvOffers;
     private Button btProfile;
     private Button btOfferMap;
 
@@ -31,14 +34,15 @@ public class Main extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        createFakeData(); // Create fake data to database
+        String offerTitles[]=readDatabase(); // Retrieve data from database
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Content
-        tvMain = (TextView)findViewById(R.id.tvMain);
-        btProfile = (Button)findViewById(R.id.btProfile);
-        btOfferMap = (Button)findViewById(R.id.btOfferMap);
+        btProfile=(Button)findViewById(R.id.btProfile);
+        btOfferMap=(Button)findViewById(R.id.btOfferMap);
         //Actions
         btProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,9 +50,13 @@ public class Main extends AppCompatActivity {
                 openProfile();
             }
         });
-        // My code
-        createFakeData();
-        tvMain.setText(readDatabase());
+        //TextView
+        tvOffersNumber=(TextView)findViewById(R.id.tvOffersNumber);
+        tvOffersNumber.setText("Mostrando "+offerTitles.length+" elementos.");
+        //ListView
+        lvOffers=(ListView)findViewById(R.id.lvOffers);
+        ArrayAdapter<String> itemsAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,offerTitles);
+        lvOffers.setAdapter(itemsAdapter);
     }
 
     /**
@@ -113,17 +121,17 @@ public class Main extends AppCompatActivity {
     }
 
     /**
-     * Read offers from the database
+     * Read offers from the database, return an array with them
      */
-    public String readDatabase(){
-        String text="";
+    public String[] readDatabase(){
         List<Offer> myOffers;
         DbInterfaceOffers dbInterfaceOffers = new DbInterfaceOffers(this);
         myOffers = dbInterfaceOffers.getAllOffers();
         Log.i("Database",myOffers.size()+" items were read.");
-        for (Offer offer : myOffers){
-            text=text+offer.toString()+"\n";
+        String offerTitles[]=new String[myOffers.size()];
+        for (int i=0;i<offerTitles.length;i++){
+            offerTitles[i]=myOffers.get(i).getTitle()+"\n"+myOffers.get(i).getDescription();
         }
-        return text;
+        return offerTitles;
     }
 }
