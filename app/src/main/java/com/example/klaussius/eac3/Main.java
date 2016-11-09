@@ -8,12 +8,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import dataBase.DbInterfaceOffers;
 import dataBase.DbInterfaceProfile;
@@ -35,7 +34,7 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         createFakeData(); // Create fake data to database
-        String offerTitles[]=readDatabase(); // Retrieve data from database
+        ArrayList<Offer>myOffers=readDbOffers();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -52,11 +51,11 @@ public class Main extends AppCompatActivity {
         });
         //TextView
         tvOffersNumber=(TextView)findViewById(R.id.tvOffersNumber);
-        tvOffersNumber.setText("Mostrando "+offerTitles.length+" elementos.");
+        tvOffersNumber.setText("Mostrando "+myOffers.size()+" elementos.");
         //ListView
         lvOffers=(ListView)findViewById(R.id.lvOffers);
-        ArrayAdapter<String> itemsAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,offerTitles);
-        lvOffers.setAdapter(itemsAdapter);
+        ArrayAdapterOffer arrayAdapterOffer = new ArrayAdapterOffer(this,myOffers);
+        lvOffers.setAdapter(arrayAdapterOffer);
     }
 
     /**
@@ -121,17 +120,11 @@ public class Main extends AppCompatActivity {
     }
 
     /**
-     * Read offers from the database, return an array with them
+     * Get the offers from the DataBase
+     * @return offers
      */
-    public String[] readDatabase(){
-        List<Offer> myOffers;
+    public ArrayList<Offer> readDbOffers(){
         DbInterfaceOffers dbInterfaceOffers = new DbInterfaceOffers(this);
-        myOffers = dbInterfaceOffers.getAllOffers();
-        Log.i("Database",myOffers.size()+" items were read.");
-        String offerTitles[]=new String[myOffers.size()];
-        for (int i=0;i<offerTitles.length;i++){
-            offerTitles[i]=myOffers.get(i).getTitle()+"\n"+myOffers.get(i).getDescription();
-        }
-        return offerTitles;
+        return dbInterfaceOffers.getAllOffers();
     }
 }

@@ -18,7 +18,7 @@ public class DbInterfaceOffers {
     protected static final String TABLE_NAME = "offer";
 
     protected static final String _ID = "_id";
-    protected static final String TITULO = "titulo";
+    protected static final String TITULO = "title";
     protected static final String DESCRIPTION = "description";
     protected static final String LATITUDE = "latitude";
     protected static final String LONGITUDE = "longitude";

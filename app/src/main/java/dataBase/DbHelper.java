@@ -12,7 +12,7 @@ import static android.content.ContentValues.TAG;
  * Created by Klaussius on 09/11/2016.
  */
 class DbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION=3;
+    private static final int DATABASE_VERSION=6;
     private static final String DATABASE_NAME="OffersEAC3.db";
 
     /**
@@ -59,6 +59,7 @@ class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(TAG, "Actualizando la bdd de la versión" + oldVersion + " a " + newVersion + ". Destruirá todos los datos.");
         db.execSQL("DROP TABLE IF EXISTS " + DbInterfaceOffers.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + DbInterfaceProfile.TABLE_NAME);
         onCreate(db);
     }
 }
