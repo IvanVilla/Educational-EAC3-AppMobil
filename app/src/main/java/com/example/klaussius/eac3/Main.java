@@ -1,11 +1,14 @@
 package com.example.klaussius.eac3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -13,13 +16,14 @@ import java.util.List;
 import dataBase.DbInterfaceOffers;
 import dataBase.DbInterfaceProfile;
 import model.Offer;
-import model.Profile;
 import zergFakeData.CreateOffers;
 import zergFakeData.CreateProfile;
 
 public class Main extends AppCompatActivity {
 
     TextView tvMain;
+    Button btProfile;
+    Button btOfferMap;
 
     /**
      * OnCreate Main Activity
@@ -31,10 +35,17 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // Controls
+        // Content
         tvMain = (TextView)findViewById(R.id.tvMain);
-
+        btProfile = (Button)findViewById(R.id.btProfile);
+        btOfferMap = (Button)findViewById(R.id.btOfferMap);
+        //Actions
+        btProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openProfile();
+            }
+        });
         // My code
         createFakeData();
         tvMain.setText(readDatabase());
@@ -71,6 +82,12 @@ public class Main extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Button Actions
+    public void openProfile(){
+        Intent profile = new Intent(this, Profile.class);
+        startActivity(profile);
+    }
+
     // My Code
     /**
      * Clean the database
@@ -96,17 +113,10 @@ public class Main extends AppCompatActivity {
     }
 
     /**
-     * Read data fron the database
+     * Read offers from the database
      */
     public String readDatabase(){
         String text="";
-        // Show profile
-        Profile myProfile = new Profile();
-        DbInterfaceProfile dbInterfaceProfile = new DbInterfaceProfile(this);
-        myProfile = dbInterfaceProfile.getProfile();
-        Log.i("Database","The profile was read.");
-        text = text+myProfile.toString()+"\n\n";
-        // Show offers
         List<Offer> myOffers;
         DbInterfaceOffers dbInterfaceOffers = new DbInterfaceOffers(this);
         myOffers = dbInterfaceOffers.getAllOffers();
