@@ -94,4 +94,18 @@ public class Profile {
     public void setImage(String image) {
         this.image = image;
     }
+
+    /**
+     * Return the profile toString
+     * @return the profile in String format
+     */
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

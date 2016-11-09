@@ -13,32 +13,31 @@ import model.Offer;
  * Manages the table offer
  * Created by Klaussius on 09/11/2016.
  */
+public class DbInterfaceOffers {
 
-public class OffersDbInterface {
+    protected static final String TABLE_NAME = "offer";
 
-    static final String TABLE_NAME = "offer";
-
-    static final String _ID = "_id";
-    static final String TITULO = "titulo";
-    static final String DESCRIPTION = "description";
-    static final String LATITUDE = "latitude";
-    static final String LONGITUDE = "longitude";
-    static final String PHONE = "phone";
-    static final String DAY = "day";
-    static final String MONTH = "month";
-    static final String YEAR = "year";
+    protected static final String _ID = "_id";
+    protected static final String TITULO = "titulo";
+    protected static final String DESCRIPTION = "description";
+    protected static final String LATITUDE = "latitude";
+    protected static final String LONGITUDE = "longitude";
+    protected static final String PHONE = "phone";
+    protected static final String DAY = "day";
+    protected static final String MONTH = "month";
+    protected static final String YEAR = "year";
 
     private final Context context;
-    private OffersDbHelper myHelp;
+    private DbHelper myHelp;
     private SQLiteDatabase bd;
 
     /**
      * Constructor
      * @param context contexto
      */
-    public OffersDbInterface(Context context) {
+    public DbInterfaceOffers(Context context) {
         this.context = context;
-        myHelp = new OffersDbHelper(context);
+        myHelp = new DbHelper(context);
     }
 
     /**
@@ -88,7 +87,7 @@ public class OffersDbInterface {
      * Open la BDD
      * @return este objeto
      */
-    public OffersDbInterface open(){
+    public DbInterfaceOffers open(){
         bd= myHelp.getWritableDatabase();
         return this;
     }
@@ -103,7 +102,7 @@ public class OffersDbInterface {
     /**
      * Clean the dataBase
      */
-    public void cleanDB(){
+    public void cleanTable(){
         open();
         bd.delete(TABLE_NAME,null,null);
         close();

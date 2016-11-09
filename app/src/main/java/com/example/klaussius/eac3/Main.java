@@ -10,9 +10,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import dataBase.OffersDbInterface;
+import dataBase.DbInterfaceOffers;
+import dataBase.DbInterfaceProfile;
 import model.Offer;
+import model.Profile;
 import zergFakeData.CreateOffers;
+import zergFakeData.CreateProfile;
 
 public class Main extends AppCompatActivity {
 
@@ -33,7 +36,7 @@ public class Main extends AppCompatActivity {
         tvMain = (TextView)findViewById(R.id.tvMain);
 
         // My code
-        //createFakeOffers();
+        createFakeData();
         tvMain.setText(readDatabase());
     }
 
@@ -70,17 +73,26 @@ public class Main extends AppCompatActivity {
 
     // My Code
     /**
-     * Clean the database, create a fake collection on offers and save it on the database
+     * Clean the database
+     * Create a fake collection on offer and save it on the database
+     * Create a fake profile on profile and save it on the database
      */
-    public void createFakeOffers(){
-        OffersDbInterface offersDbInterface = new OffersDbInterface(this);
-        offersDbInterface.cleanDB();
+    public void createFakeData(){
+        // Fake Offers
+        DbInterfaceOffers dbInterfaceOffers = new DbInterfaceOffers(this);
+        dbInterfaceOffers.cleanTable();
         CreateOffers offers = new CreateOffers();
         offers.createFakeCollection();
         for (Offer item : offers.getOffers()){
-            offersDbInterface.insertOffer(item);
+            dbInterfaceOffers.insertOffer(item);
         }
         Log.i("Database",offers.getOffers().size()+" items were inserted.");
+        // Fake Profile
+        DbInterfaceProfile dbInterfaceProfile = new DbInterfaceProfile(this);
+        dbInterfaceProfile.cleanTable();
+        CreateProfile profile = new CreateProfile();
+        dbInterfaceProfile.insertProfile(profile.createFakeProfile());
+        Log.i("Database","The profile was inserted.");
     }
 
     /**
@@ -88,9 +100,16 @@ public class Main extends AppCompatActivity {
      */
     public String readDatabase(){
         String text="";
+        // Show profile
+        Profile myProfile = new Profile();
+        DbInterfaceProfile dbInterfaceProfile = new DbInterfaceProfile(this);
+        myProfile = dbInterfaceProfile.getProfile();
+        Log.i("Database","The profile was read.");
+        text = text+myProfile.toString()+"\n\n";
+        // Show offers
         List<Offer> myOffers;
-        OffersDbInterface offersDbInterface = new OffersDbInterface(this);
-        myOffers = offersDbInterface.getAllOffers();
+        DbInterfaceOffers dbInterfaceOffers = new DbInterfaceOffers(this);
+        myOffers = dbInterfaceOffers.getAllOffers();
         Log.i("Database",myOffers.size()+" items were read.");
         for (Offer offer : myOffers){
             text=text+offer.toString()+"\n";

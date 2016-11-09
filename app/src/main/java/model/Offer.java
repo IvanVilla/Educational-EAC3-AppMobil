@@ -171,6 +171,10 @@ public class Offer {
         this.year = year;
     }
 
+    /**
+     * Return the offer toString
+     * @return the offer in String format
+     */
     @Override
     public String toString() {
         return "Offer{" +
