@@ -15,10 +15,18 @@ import model.Offer;
  */
 
 public class OffersDbInterface {
-    public static final String TABLE_NAME = "offer";
 
-    public static final String _ID="_id";
-    public static final String TITULO = "titulo";
+    static final String TABLE_NAME = "offer";
+
+    static final String _ID = "_id";
+    static final String TITULO = "titulo";
+    static final String DESCRIPTION = "description";
+    static final String LATITUDE = "latitude";
+    static final String LONGITUDE = "longitude";
+    static final String PHONE = "phone";
+    static final String DAY = "day";
+    static final String MONTH = "month";
+    static final String YEAR = "year";
 
     private final Context context;
     private OffersDbHelper myHelp;
@@ -26,7 +34,7 @@ public class OffersDbInterface {
 
     /**
      * Constructor
-     * @param context
+     * @param context contexto
      */
     public OffersDbInterface(Context context) {
         this.context = context;
@@ -34,41 +42,21 @@ public class OffersDbInterface {
     }
 
     /**
-     * Open la BDD
-     * @return este objeto
-     */
-    public OffersDbInterface abrir(){
-        bd= myHelp.getWritableDatabase();
-        return this;
-    }
-
-    /**
-     * Close the BDD
-     */
-    public void cerrar(){
-        myHelp.close();
-    }
-
-    /**
-     * Vacía la base de datos
-     */
-    public void cleanDB(){
-        abrir();
-        bd.delete(TABLE_NAME,null,null);
-        cerrar();
-    }
-
-    /**
      * Insert one offer in the dataBase
-     * @param myOffer
-     * @return -1 si no se ha podido realizar
+     * @param myOffer offer to insert
      */
     public void insertOffer(Offer myOffer){
-        abrir();
+        open();
         ContentValues initialValues = new ContentValues();
         initialValues.put(TITULO,myOffer.getTitle());
+        initialValues.put(DESCRIPTION,myOffer.getDescription());
+        initialValues.put(LONGITUDE,myOffer.getLongitude());
+        initialValues.put(PHONE,myOffer.getPhone());
+        initialValues.put(DAY,myOffer.getDay());
+        initialValues.put(MONTH,myOffer.getMonth());
+        initialValues.put(YEAR,myOffer.getYear());
         bd.insert(TABLE_NAME,null,initialValues);
-        cerrar();
+        close();
     }
 
     /**
@@ -77,14 +65,47 @@ public class OffersDbInterface {
      */
     public ArrayList<Offer> getAllOffers(){
         ArrayList<Offer> myOffers = new ArrayList<>();
-        abrir();
-        Cursor resultado= bd.query(TABLE_NAME, new String[]{_ID,TITULO}, null,null,null,null,null);
-        while (resultado.moveToNext()) {
+        open();
+        Cursor result = bd.query(TABLE_NAME, new String[]{_ID,TITULO,DESCRIPTION,LATITUDE,LONGITUDE,PHONE,DAY,MONTH,YEAR}, null,null,null,null,null);
+        while (result.moveToNext()) {
             Offer myOffer = new Offer();
-            myOffer.setTitle(resultado.getString(1));
+            myOffer.setTitle(result.getString(1));
+            myOffer.setDescription(result.getString(2));
+            myOffer.setLatitude(result.getFloat(3));
+            myOffer.setLongitude(result.getFloat(4));
+            myOffer.setPhone(result.getString(5));
+            myOffer.setDay(result.getInt(6));
+            myOffer.setMonth(result.getInt(7));
+            myOffer.setYear(result.getInt(8));
             myOffers.add(myOffer);
         }
-        cerrar();
+        result.close();
+        close();
         return myOffers;
+    }
+
+    /**
+     * Open la BDD
+     * @return este objeto
+     */
+    public OffersDbInterface open(){
+        bd= myHelp.getWritableDatabase();
+        return this;
+    }
+
+    /**
+     * Close the BDD
+     */
+    private void close(){
+        myHelp.close();
+    }
+
+    /**
+     * Clean the dataBase
+     */
+    public void cleanDB(){
+        open();
+        bd.delete(TABLE_NAME,null,null);
+        close();
     }
 }

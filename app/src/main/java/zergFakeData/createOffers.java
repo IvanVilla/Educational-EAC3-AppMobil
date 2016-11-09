@@ -30,18 +30,26 @@ public class CreateOffers {
         offers = new ArrayList<>();
     }
 
-    public void createFakeCollection(){
-        for (String[] element:offersFakeSource){
+    public void createFakeCollection() {
+        for (String[] element : offersFakeSource) {
             String title = element[0];
             String description = element[1];
             float latitude = Float.parseFloat(element[2]);
             float longitude = Float.parseFloat(element[3]);
             String phone = element[4];
-            int day = Integer.parseInt(element[4]);
-            int month = Integer.parseInt(element[4]);
-            int year = Integer.parseInt(element[4]);
-            offers.add(new Offer(title,description,latitude,longitude,phone,day,month,year));
+            int day = Integer.parseInt(element[5]);
+            int month = Integer.parseInt(element[6]);
+            int year = Integer.parseInt(element[7]);
+            offers.add(new Offer(title, description, latitude, longitude, phone, day, month, year));
         }
-        Log.i("Info","Created "+offers.size()+" fake objects.");
+        Log.i("Info", "Created " + offers.size() + " fake objects.");
+    }
+
+    /***
+     * Get the fake offers list
+     * @return fake offers
+     */
+    public ArrayList<Offer> getOffers() {
+        return offers;
     }
 }

@@ -149,7 +149,7 @@ public class Offer {
 
     /**
      * Set the month
-     * @param month
+     * @param month month
      */
     public void setMonth(int month) {
         this.month = month;
@@ -169,5 +169,19 @@ public class Offer {
      */
     public void setYear(int year) {
         this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "Offer{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", phone='" + phone + '\'' +
+                ", day=" + day +
+                ", month=" + month +
+                ", year=" + year +
+                '}';
     }
 }
