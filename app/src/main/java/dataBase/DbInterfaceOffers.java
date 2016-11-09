@@ -50,6 +50,7 @@ public class DbInterfaceOffers {
         initialValues.put(TITULO,myOffer.getTitle());
         initialValues.put(DESCRIPTION,myOffer.getDescription());
         initialValues.put(LONGITUDE,myOffer.getLongitude());
+        initialValues.put(LATITUDE,myOffer.getLatitude());
         initialValues.put(PHONE,myOffer.getPhone());
         initialValues.put(DAY,myOffer.getDay());
         initialValues.put(MONTH,myOffer.getMonth());

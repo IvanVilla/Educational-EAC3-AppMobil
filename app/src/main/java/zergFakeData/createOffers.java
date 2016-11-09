@@ -13,10 +13,10 @@ import model.Offer;
 
 public class CreateOffers {
     private final static String offersFakeSource[][]={
-            {"Oferta 1","Descripción 1","0","0","600000001","1","1","2016"},
-            {"Oferta 2","Descripción 2","0","0","600000002","2","2","2016"},
-            {"Oferta 3","Descripción 3","0","0","600000003","3","3","2016"},
-            {"Oferta 4","Descripción 4","0","0","600000004","4","4","2016"},
+            {"Presidente del Gobierno","Requiere movilidad geográfica. Sin experiencia.","40.445355","-3.734257","600000001","1","1","2016"},
+            {"Futbolista","Debe superar una batería de pruebas físicas y médicas.","36.502768","-6.272932","600000002","2","2","2016"},
+            {"Piloto de Combate Espacial","Academia Militar. Para personas de edades entre 18 y 21 años. 5 años de formación remunerada + contrato indefinido.","40.759299","-111.9015647","600000003","3","3","2016"},
+            {"Comercial de Tiempo","Sector turístico - viajes en el tiempo. Movilidad geográfica y temporal. Clientes de alto standing. Comisiones. No se requiere experiencia.","-33.954850","25.562235","600000004","4","4","2016"},
     };
 
     private ArrayList<Offer> offers;
