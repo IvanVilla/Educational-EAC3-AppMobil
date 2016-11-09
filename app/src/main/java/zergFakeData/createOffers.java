@@ -1,5 +1,7 @@
 package zergFakeData;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import model.Offer;
@@ -9,7 +11,7 @@ import model.Offer;
  * Created by Klaussius on 09/11/2016.
  */
 
-public class createOffers {
+public class CreateOffers {
     private final static String offersFakeSource[][]={
             {"Oferta 1","Descripción 1","0","0","600000001","1","1","2016"},
             {"Oferta 2","Descripción 2","0","0","600000002","2","2","2016"},
@@ -24,7 +26,7 @@ public class createOffers {
     /**
      * Constructor
      */
-    public createOffers() {
+    public CreateOffers() {
         offers = new ArrayList<>();
     }
 
@@ -40,5 +42,6 @@ public class createOffers {
             int year = Integer.parseInt(element[4]);
             offers.add(new Offer(title,description,latitude,longitude,phone,day,month,year));
         }
+        Log.i("Info","Created "+offers.size()+" fake objects.");
     }
 }
