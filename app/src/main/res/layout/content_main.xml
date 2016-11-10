@@ -39,29 +39,6 @@
             android:id="@+id/lvOffers"
             android:layout_marginTop="15dp" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp">
-
-            <Button
-                android:text="@string/profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btProfile"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/holo_orange_light" />
-
-            <Button
-                android:text="@string/offerMap"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btOfferMap"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/holo_orange_light" />
-        </LinearLayout>
-
     </LinearLayout>
 
 </RelativeLayout>

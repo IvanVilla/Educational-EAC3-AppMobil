@@ -11,6 +11,9 @@ import android.widget.TextView;
 import dataBase.DbInterfaceProfile;
 import model.Profile;
 
+/**
+ * Show us the user profile
+ */
 public class ProfileShowActivity extends AppCompatActivity {
     TextView tvName;
     TextView tvSurname;

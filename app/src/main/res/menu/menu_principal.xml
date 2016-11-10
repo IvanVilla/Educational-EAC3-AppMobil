@@ -2,9 +2,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.klaussius.eac3.MainActivity">
+
+    <!--
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    -->
+
+    <item
+        android:id="@+id/mapButton"
+        android:title="Refresh"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/map_button" />
+    <item
+        android:id="@+id/userButton"
+        android:icon="@drawable/user_button"
+        android:title="Search"
+        app:showAsAction="always"/>
 </menu>

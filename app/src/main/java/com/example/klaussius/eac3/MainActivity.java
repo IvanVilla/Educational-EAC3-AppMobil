@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,12 +18,20 @@ import dataBase.DbInterfaceOffers;
 import model.Offer;
 import zfakeData.CreateOffers;
 
+/**
+ * Main activity
+ *
+ * EXTRA:
+ * Me hubiera encantado implementar una lista en la cual aparecieran las ofertas de más reciente
+ * a más antigua, por un lado, y otro filtro de lejanía con respecto a nuestra posición actual,
+ * usando el teorema de pitágoras para calcular la distancia desde el punto actual.
+ *
+ * Por desgracia por falta de tiempo y cuestiones personales, no he podido llegar a hacerlo.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvOffersNumber;
     private ListView lvOffers;
-    private Button btProfile;
-    private Button btOfferMap;
 
     /**
      * OnCreate MainActivity Activity
@@ -38,22 +45,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Content
-        btProfile=(Button)findViewById(R.id.btProfile);
-        btOfferMap=(Button)findViewById(R.id.btOfferMap);
-        //Actions
-        btProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openProfile();
-            }
-        });
-        btOfferMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openOfferMap();
-            }
-        });
         //TextView
         tvOffersNumber=(TextView)findViewById(R.id.tvOffersNumber);
         tvOffersNumber.setText("Mostrando "+myOffers.size()+" elementos.");
@@ -95,8 +86,14 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        // Abro el mapa
+        if (id==R.id.mapButton){
+            openOfferMap();
+        }
+
+        // Abro el perfil
+        if (id==R.id.userButton){
+            openProfile();
         }
         return super.onOptionsItemSelected(item);
     }

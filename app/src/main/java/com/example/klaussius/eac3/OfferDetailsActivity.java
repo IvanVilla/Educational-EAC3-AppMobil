@@ -3,23 +3,26 @@ package com.example.klaussius.eac3;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
-
-import com.google.android.gms.maps.GoogleMap;
 
 import dataBase.DbInterfaceOffers;
 import model.Offer;
 
+/**
+ * Details of the offer
+ */
 public class OfferDetailsActivity extends AppCompatActivity {
 
-    TextView tvTitle;
-    TextView tvDescription;
-    TextView tvPhone;
-    TextView tvDate;
+    private TextView tvTitle;
+    private TextView tvDescription;
+    private TextView tvPhone;
+    private TextView tvDate;
     // Map
-    private GoogleMap mMap;
     private Float latitude;
     private Float longitude;
+
+    private View map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +49,16 @@ public class OfferDetailsActivity extends AppCompatActivity {
         latitude = offer.getLatitude();
         longitude = offer.getLongitude();
 
+        //Map
+        map = (View)findViewById(R.id.map);
+
     }
 
+    /**
+     * Get the offer object
+     * @param title
+     * @return
+     */
     public Offer getOffer(String title){
         DbInterfaceOffers dbInterfaceOffers = new DbInterfaceOffers(this);
         return dbInterfaceOffers.getOfferByTitle(title);
