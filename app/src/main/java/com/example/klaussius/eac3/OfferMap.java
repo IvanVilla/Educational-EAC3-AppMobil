@@ -1,5 +1,6 @@
 package com.example.klaussius.eac3;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -70,6 +71,7 @@ public class OfferMap extends FragmentActivity implements OnMapReadyCallback, an
             @Override
             public void onInfoWindowClick(Marker marker) {
                 Log.i("Map", "You clicked the info window!");
+                openDetail(marker.getTitle());
             }
         });
 
@@ -77,6 +79,20 @@ public class OfferMap extends FragmentActivity implements OnMapReadyCallback, an
         //this.getMyLocation();
     }
 
+    // Events
+
+    /**
+     * OpenDetail, with the title of the Marker
+     * @param title
+     */
+    public void openDetail(String title){
+        Intent openDetails = new Intent(this,OfferDetails.class);
+        openDetails.putExtra("title",title);
+        startActivity(openDetails);
+    }
+
+
+    // My Code
     /**
      * We get our location
      */

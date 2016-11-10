@@ -5,9 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
-
-import model.Offer;
 import model.Profile;
 
 /**
@@ -37,7 +34,7 @@ public class DbInterfaceProfile {
     }
 
     /**
-     * Insert one offer in the dataBase
+     * Insert one offer_for_listview in the dataBase
      * @param myProfile profile to insert
      */
     public void insertProfile(Profile myProfile){
@@ -56,7 +53,6 @@ public class DbInterfaceProfile {
      * @return Database Offers
      */
     public Profile getProfile(){
-        ArrayList<Offer> myOffers = new ArrayList<>();
         open();
         Profile myProfile = new Profile();
         Cursor result = bd.query(TABLE_NAME, new String[]{_ID,NAME,SURNAME,DESCRIPTION,IMAGE}, null,null,null,null,null);

@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import model.Offer;
 
 /**
- * Manages the table offer
+ * Manages the table offer_for_listview
  * Created by Klaussius on 09/11/2016.
  */
 public class DbInterfaceOffers {
 
-    protected static final String TABLE_NAME = "offer";
+    protected static final String TABLE_NAME = "offer_for_listview";
 
     protected static final String _ID = "_id";
     protected static final String TITULO = "title";
@@ -41,8 +41,8 @@ public class DbInterfaceOffers {
     }
 
     /**
-     * Insert one offer in the dataBase
-     * @param myOffer offer to insert
+     * Insert one offer_for_listview in the dataBase
+     * @param myOffer offer_for_listview to insert
      */
     public void insertOffer(Offer myOffer){
         open();
@@ -82,6 +82,16 @@ public class DbInterfaceOffers {
         result.close();
         close();
         return myOffers;
+    }
+
+    public Offer getOfferByTitle(String title){
+        ArrayList<Offer> myOffers = getAllOffers();
+        for (Offer item : myOffers){
+            if (item.getTitle().equals(title)){
+                return item;
+            }
+        }
+        return null;
     }
 
     /**

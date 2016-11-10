@@ -10,8 +10,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.klaussius.eac3.Profile"
-    tools:showIn="@layout/activity_profile">
+    tools:context="com.example.klaussius.eac3.ProfileEdit"
+    tools:showIn="@layout/activity_profile_edit">
 
     <LinearLayout
         android:orientation="vertical"
@@ -29,12 +29,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@android:color/black"
             android:gravity="center" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvContent"
-            android:layout_marginTop="15dp" />
 
         <TextView
             android:text="@string/name"

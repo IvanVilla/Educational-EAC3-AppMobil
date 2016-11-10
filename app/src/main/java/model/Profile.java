@@ -101,7 +101,7 @@ public class Profile {
      */
     @Override
     public String toString() {
-        return "Profile{" +
+        return "ProfileEdit{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", description='" + description + '\'' +

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,10 +16,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import dataBase.DbInterfaceOffers;
-import dataBase.DbInterfaceProfile;
 import model.Offer;
 import zergFakeData.CreateOffers;
-import zergFakeData.CreateProfile;
 
 public class Main extends AppCompatActivity {
 
@@ -34,7 +33,7 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         createFakeData(); // Create fake data to database
-        ArrayList<Offer>myOffers=readDbOffers();
+        final ArrayList<Offer>myOffers=readDbOffers();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,6 +61,13 @@ public class Main extends AppCompatActivity {
         lvOffers=(ListView)findViewById(R.id.lvOffers);
         ArrayAdapterOffer arrayAdapterOffer = new ArrayAdapterOffer(this,myOffers);
         lvOffers.setAdapter(arrayAdapterOffer);
+        lvOffers.setClickable(true);
+        lvOffers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                openDetail(myOffers.get(i).getTitle());
+            }
+        });
     }
 
     /**
@@ -96,16 +102,27 @@ public class Main extends AppCompatActivity {
     }
 
     // Button Actions
+
+    /**
+     * Open the offer_for_listview with the title
+     * @param title title of the offer_for_listview
+     */
+    public void openDetail(String title){
+        Intent openDetails = new Intent(this,OfferDetails.class);
+        openDetails.putExtra("title",title);
+        startActivity(openDetails);
+    }
+
     /**
      * Open the profile menu
      */
     public void openProfile(){
-        Intent profile = new Intent(this, Profile.class);
+        Intent profile = new Intent(this, ProfileShow.class);
         startActivity(profile);
     }
 
     /**
-     * Open the offer map menu
+     * Open the offer_for_listview map menu
      */
     public void openOfferMap(){
         Intent offerMap = new Intent(this, OfferMap.class);
@@ -115,7 +132,7 @@ public class Main extends AppCompatActivity {
     // My Code
     /**
      * Clean the database
-     * Create a fake collection on offer and save it on the database
+     * Create a fake collection on offer_for_listview and save it on the database
      * Create a fake profile on profile and save it on the database
      */
     public void createFakeData(){
@@ -128,12 +145,6 @@ public class Main extends AppCompatActivity {
             dbInterfaceOffers.insertOffer(item);
         }
         Log.i("Database",offers.getOffers().size()+" items were inserted.");
-        // Fake Profile
-        DbInterfaceProfile dbInterfaceProfile = new DbInterfaceProfile(this);
-        dbInterfaceProfile.cleanTable();
-        CreateProfile profile = new CreateProfile();
-        dbInterfaceProfile.insertProfile(profile.createFakeProfile());
-        Log.i("Database","The profile was inserted.");
     }
 
     /**

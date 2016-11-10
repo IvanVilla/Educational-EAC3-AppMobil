@@ -12,7 +12,7 @@ import static android.content.ContentValues.TAG;
  * Created by Klaussius on 09/11/2016.
  */
 class DbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION=6;
+    private static final int DATABASE_VERSION=7;
     private static final String DATABASE_NAME="OffersEAC3.db";
 
     /**

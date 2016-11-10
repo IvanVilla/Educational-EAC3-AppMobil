@@ -21,7 +21,7 @@ public class CursorAdapterOffer extends CursorAdapter {
     // Inflate new item
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.offer, parent, false);
+        return LayoutInflater.from(context).inflate(R.layout.offer_for_listview, parent, false);
     }
 
     // Extract data and fill item

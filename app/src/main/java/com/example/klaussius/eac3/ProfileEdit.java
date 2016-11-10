@@ -8,16 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import dataBase.DbInterfaceProfile;
+import model.Profile;
 
 /**
  * Class for profile edit
  */
-public class Profile extends AppCompatActivity {
+public class ProfileEdit extends AppCompatActivity {
 
-    private TextView tvContent;
     private Button btSaveProfile;
     private Button btClearProfile;
     private Button btTakeBack;
@@ -34,7 +33,7 @@ public class Profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_profile_edit);
         // Toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,9 +65,6 @@ public class Profile extends AppCompatActivity {
                 takeBack();
             }
         });
-        // Content
-        tvContent=(TextView)findViewById(R.id.tvContent);
-        tvContent.setText(showProfile());
     }
 
     //Actions for the buttons
@@ -77,7 +73,14 @@ public class Profile extends AppCompatActivity {
      */
     public void saveProfile(){
         if (validateData()){
-            Log.i("Save Profile","Data fields are filled properly.");
+            Log.i("Save ProfileEdit","Data fields are filled properly.");
+            DbInterfaceProfile dbInterfaceProfile = new DbInterfaceProfile(this);
+            Profile profile = new Profile();
+            profile.setName(etName.getText().toString());
+            profile.setSurname(etSurname.getText().toString());
+            profile.setDescription(etDescription.getText().toString());
+            profile.setImage(etImage.getText().toString());
+            dbInterfaceProfile.insertProfile(profile);
             takeBack();
         }
         // Snackbar
@@ -109,35 +112,21 @@ public class Profile extends AppCompatActivity {
     public boolean validateData(){
         boolean dataOk=true;
         if (etName.getText().toString().equals("")){
-            Log.i("Save Profile","Name field is void.");
+            Log.i("Save ProfileEdit","Name field is void.");
             dataOk=false;
         }
         if (etSurname.getText().toString().equals("")){
-            Log.i("Save Profile","Surname field is void.");
+            Log.i("Save ProfileEdit","Surname field is void.");
             dataOk=false;
         }
         if (etDescription.getText().toString().equals("")){
-            Log.i("Save Profile","Description field is void.");
+            Log.i("Save ProfileEdit","Description field is void.");
             dataOk=false;
         }
         if (etImage.getText().toString().equals("")){
-            Log.i("Save Profile","Image field is void");
+            Log.i("Save ProfileEdit","Image field is void");
             dataOk=false;
         }
         return dataOk;
-    }
-
-    /**
-     * Read profile from the database
-     * @return profile
-     */
-    public String showProfile(){
-        String text ="";
-        model.Profile myProfile;
-        DbInterfaceProfile dbInterfaceProfile = new DbInterfaceProfile(this);
-        myProfile = dbInterfaceProfile.getProfile();
-        Log.i("Database","The profile was read.");
-        text = text+myProfile.toString()+"\n\n";
-        return text;
     }
 }

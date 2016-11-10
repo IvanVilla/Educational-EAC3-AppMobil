@@ -172,8 +172,8 @@ public class Offer {
     }
 
     /**
-     * Return the offer toString
-     * @return the offer in String format
+     * Return the offer_for_listview toString
+     * @return the offer_for_listview in String format
      */
     @Override
     public String toString() {
