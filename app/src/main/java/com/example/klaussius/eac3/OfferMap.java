@@ -1,6 +1,11 @@
 package com.example.klaussius.eac3;
 
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
@@ -10,6 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -17,7 +23,7 @@ import java.util.ArrayList;
 import dataBase.DbInterfaceOffers;
 import model.Offer;
 
-public class OfferMap extends FragmentActivity implements OnMapReadyCallback {
+public class OfferMap extends FragmentActivity implements OnMapReadyCallback, android.location.LocationListener {
 
     private GoogleMap mMap;
 
@@ -30,7 +36,6 @@ public class OfferMap extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
 
     /**
      * Manipulates the map once available.
@@ -48,17 +53,58 @@ public class OfferMap extends FragmentActivity implements OnMapReadyCallback {
         // Settings for the map
         UiSettings mapSettings = mMap.getUiSettings();
         mapSettings.setZoomControlsEnabled(true);
+        //mMap.setMyLocationEnabled(true);
 
         // Add markers in our map
-        for (Offer offer : readDbOffers()){
-            LatLng offerLatLng = new LatLng(offer.getLatitude(),offer.getLongitude());
+        for (Offer offer : readDbOffers()) {
+            LatLng offerLatLng = new LatLng(offer.getLatitude(), offer.getLongitude());
             mMap.addMarker(new MarkerOptions()
                     .position(offerLatLng)
                     .title(offer.getTitle())
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.offericon)));
         }
+        Log.i("Map", "Offers located in the map");
 
-        Log.i("Map","Offers located in the map");
+        // Markers events
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Log.i("Map", "You clicked the info window!");
+            }
+        });
+
+        // Set my location
+        //this.getMyLocation();
+    }
+
+    /**
+     * We get our location
+     */
+    public void getMyLocation() {
+        // LocationManager
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        // Options
+        Criteria options = new Criteria();
+        options.setAccuracy(Criteria.ACCURACY_FINE);
+        options.setPowerRequirement(Criteria.POWER_MEDIUM);
+        options.setAltitudeRequired(false);
+        options.setBearingRequired(false);
+        options.setSpeedRequired(false);
+
+        // Best Provider
+        String provider = locationManager.getBestProvider(options, true);
+
+        // Permissions
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        }
+
+        // Take last location know
+        Location location = locationManager.getLastKnownLocation(provider);
+
+        // Request location each 20 secs
+        locationManager.requestLocationUpdates(provider,20000,0,this);
     }
 
     /**
@@ -68,5 +114,21 @@ public class OfferMap extends FragmentActivity implements OnMapReadyCallback {
     public ArrayList<Offer> readDbOffers(){
         DbInterfaceOffers dbInterfaceOffers = new DbInterfaceOffers(this);
         return dbInterfaceOffers.getAllOffers();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
     }
 }

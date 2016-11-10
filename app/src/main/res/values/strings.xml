@@ -13,4 +13,5 @@
     <string name="etDescription">Descripción</string>
     <string name="image">Imagen</string>
     <string name="title_activity_offer_map">Map</string>
+    <string name="title_activity_offer_details">OfferDetails</string>
 </resources>
