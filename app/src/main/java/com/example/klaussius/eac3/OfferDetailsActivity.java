@@ -5,17 +5,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.GoogleMap;
+
 import dataBase.DbInterfaceOffers;
 import model.Offer;
 
-public class OfferDetails extends AppCompatActivity {
+public class OfferDetailsActivity extends AppCompatActivity {
+
+    TextView tvTitle;
+    TextView tvDescription;
+    TextView tvPhone;
+    TextView tvDate;
+    // Map
+    private GoogleMap mMap;
+    private Float latitude;
+    private Float longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        TextView tvTitle;
-        TextView tvDescription;
-        TextView tvPhone;
-        TextView tvDate;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_details);
@@ -36,6 +43,9 @@ public class OfferDetails extends AppCompatActivity {
         tvDescription.setText(offer.getDescription());
         tvPhone.setText(offer.getPhone());
         tvDate.setText(offer.getDay()+"/"+offer.getMonth()+"/"+offer.getYear());
+        latitude = offer.getLatitude();
+        longitude = offer.getLongitude();
+
     }
 
     public Offer getOffer(String title){

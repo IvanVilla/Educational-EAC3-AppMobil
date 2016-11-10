@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 import dataBase.DbInterfaceOffers;
 import model.Offer;
-import zergFakeData.CreateOffers;
+import zfakeData.CreateOffers;
 
-public class Main extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private TextView tvOffersNumber;
     private ListView lvOffers;
@@ -27,7 +27,7 @@ public class Main extends AppCompatActivity {
     private Button btOfferMap;
 
     /**
-     * OnCreate Main Activity
+     * OnCreate MainActivity Activity
      * @param savedInstanceState saved instance state
      */
     @Override
@@ -108,7 +108,7 @@ public class Main extends AppCompatActivity {
      * @param title title of the offer_for_listview
      */
     public void openDetail(String title){
-        Intent openDetails = new Intent(this,OfferDetails.class);
+        Intent openDetails = new Intent(this,OfferDetailsActivity.class);
         openDetails.putExtra("title",title);
         startActivity(openDetails);
     }
@@ -117,7 +117,7 @@ public class Main extends AppCompatActivity {
      * Open the profile menu
      */
     public void openProfile(){
-        Intent profile = new Intent(this, ProfileShow.class);
+        Intent profile = new Intent(this, ProfileShowActivity.class);
         startActivity(profile);
     }
 
@@ -125,7 +125,7 @@ public class Main extends AppCompatActivity {
      * Open the offer_for_listview map menu
      */
     public void openOfferMap(){
-        Intent offerMap = new Intent(this, OfferMap.class);
+        Intent offerMap = new Intent(this, OfferMapActivity.class);
         startActivity(offerMap);
     }
 

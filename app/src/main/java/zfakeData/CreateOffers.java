@@ -1,4 +1,4 @@
-package zergFakeData;
+package zfakeData;
 
 import android.util.Log;
 

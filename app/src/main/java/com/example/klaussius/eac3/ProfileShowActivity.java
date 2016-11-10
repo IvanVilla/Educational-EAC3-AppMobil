@@ -11,11 +11,10 @@ import android.widget.TextView;
 import dataBase.DbInterfaceProfile;
 import model.Profile;
 
-public class ProfileShow extends AppCompatActivity {
+public class ProfileShowActivity extends AppCompatActivity {
     TextView tvName;
     TextView tvSurname;
     TextView tvDescription;
-    TextView tvImage;
     Button btEdit;
     Button btTakeBack;
 
@@ -30,7 +29,6 @@ public class ProfileShow extends AppCompatActivity {
         tvName = (TextView)findViewById(R.id.tvName);
         tvSurname = (TextView)findViewById(R.id.tvSurname);
         tvDescription = (TextView)findViewById(R.id.tvDescription);
-        tvImage = (TextView)findViewById(R.id.tvImage);
 
         // Buttons
         btEdit = (Button)findViewById(R.id.btEdit);
@@ -60,7 +58,6 @@ public class ProfileShow extends AppCompatActivity {
         tvName.setText(profile.getName());
         tvSurname.setText(profile.getSurname());
         tvDescription.setText(profile.getDescription());
-        tvImage.setText(profile.getImage());
     }
 
 
@@ -70,7 +67,7 @@ public class ProfileShow extends AppCompatActivity {
      * Start activity to edit profile
      */
     public void edit(){
-        Intent myIntent = new Intent(this,ProfileEdit.class);
+        Intent myIntent = new Intent(this,ProfileEditActivity.class);
         startActivity(myIntent);
     }
 

@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.klaussius.eac3.ProfileShow"
+    tools:context="com.example.klaussius.eac3.ProfileShowActivity"
     tools:showIn="@layout/activity_profile_show">
 
     <LinearLayout
@@ -67,19 +67,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tvDescription"
-            android:layout_marginTop="5dp" />
-
-        <TextView
-            android:text="@string/image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvImageInfo"
-            android:layout_marginTop="15dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvImage"
             android:layout_marginTop="5dp" />
 
         <LinearLayout

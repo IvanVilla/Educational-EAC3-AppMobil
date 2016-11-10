@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.klaussius.eac3.ProfileEdit"
+    tools:context="com.example.klaussius.eac3.ProfileEditActivity"
     tools:showIn="@layout/activity_profile_edit">
 
     <LinearLayout
@@ -69,18 +69,22 @@
             android:ems="10"
             android:id="@+id/etDescription" />
 
-        <TextView
-            android:text="@string/image"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvImage" />
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            android:id="@+id/ivProfileImage"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="15dp" />
 
-        <EditText
+        <Button
+            android:text="@string/takePhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/etImage" />
+            android:id="@+id/btTakePhoto"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:backgroundTint="@color/cast_intro_overlay_button_background_color" />
 
         <LinearLayout
             android:orientation="horizontal"

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import dataBase.DbInterfaceOffers;
 import model.Offer;
 
-public class OfferMap extends FragmentActivity implements OnMapReadyCallback, android.location.LocationListener {
+public class OfferMapActivity extends FragmentActivity implements OnMapReadyCallback, android.location.LocationListener {
 
     private GoogleMap mMap;
 
@@ -86,7 +86,7 @@ public class OfferMap extends FragmentActivity implements OnMapReadyCallback, an
      * @param title
      */
     public void openDetail(String title){
-        Intent openDetails = new Intent(this,OfferDetails.class);
+        Intent openDetails = new Intent(this,OfferDetailsActivity.class);
         openDetails.putExtra("title",title);
         startActivity(openDetails);
     }
