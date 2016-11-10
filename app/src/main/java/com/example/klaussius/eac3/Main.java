@@ -49,6 +49,12 @@ public class Main extends AppCompatActivity {
                 openProfile();
             }
         });
+        btOfferMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openOfferMap();
+            }
+        });
         //TextView
         tvOffersNumber=(TextView)findViewById(R.id.tvOffersNumber);
         tvOffersNumber.setText("Mostrando "+myOffers.size()+" elementos.");
@@ -90,9 +96,20 @@ public class Main extends AppCompatActivity {
     }
 
     // Button Actions
+    /**
+     * Open the profile menu
+     */
     public void openProfile(){
         Intent profile = new Intent(this, Profile.class);
         startActivity(profile);
+    }
+
+    /**
+     * Open the offer map menu
+     */
+    public void openOfferMap(){
+        Intent offerMap = new Intent(this, OfferMap.class);
+        startActivity(offerMap);
     }
 
     // My Code
