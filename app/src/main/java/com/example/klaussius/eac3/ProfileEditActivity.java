@@ -35,6 +35,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     private Button btSaveProfile;
     private Button btClearProfile;
     private Button btTakeBack;
+    private Button btTakePhoto;
     private EditText etName;
     private EditText etSurname;
     private EditText etDescription;
@@ -72,6 +73,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         btSaveProfile=(Button)findViewById(R.id.btSaveProfile);
         btClearProfile =(Button)findViewById(R.id.btClearProfile);
         btTakeBack=(Button)findViewById(R.id.btTakeBack);
+        btTakePhoto=(Button)findViewById(R.id.btTakePhoto);
         // Button Actions
         btSaveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +91,12 @@ public class ProfileEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 takeBack();
+            }
+        });
+        btTakePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                takePhoto();
             }
         });
         // ProfileImage
